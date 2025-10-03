@@ -1,0 +1,13 @@
+{
+  "name": "scenepack-web",
+  "version": "1.0.0",
+  "description": "4K Scene Packs Downloader",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["youtube", "downloader", "scenepack"],
+  "author": "cassiel.ae",
+  "license": "MIT"
+}

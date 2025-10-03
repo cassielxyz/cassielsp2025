@@ -1,0 +1,565 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    font-family: 'VT323', monospace;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    position: relative;
+    min-height: 100vh; /* Ensure body takes full height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Preload and cache background images */
+body::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+    background-image: 
+        url('https://i.postimg.cc/m20jH6Ch/wallhaven-zyg3gj.jpg'),
+        url('https://i.postimg.cc/Bn7T8kCP/wallhaven-857671.jpg'),
+        url('https://i.postimg.cc/DZRZfs4J/Vignette-PNG-Image-File.png'),
+        url('https://i.postimg.cc/QMyk9whn/Professor-from-Money-Heist.jpg');
+}
+
+.dark-mode {
+    background: url('https://i.postimg.cc/m20jH6Ch/wallhaven-zyg3gj.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(9, 255, 0);
+}
+
+.light-mode {
+    background: url('https://i.postimg.cc/Bn7T8kCP/wallhaven-857671.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(0, 174, 255);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://i.postimg.cc/DZRZfs4J/Vignette-PNG-Image-File.png') no-repeat center center;
+    background-size: cover;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.header-container {
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.2); /* Increased opacity for brighter background */
+    backdrop-filter: blur(15px); /* Increased blur for more brightness */
+    padding: 20px 0;
+    margin: -20px -20px 20px -20px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); /* Added glow effect */
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 20px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    min-width: 400px;
+    min-height: 60px;
+}
+
+.dark-mode h1 {
+    color: #39ff14;
+    text-shadow: 
+        0 0 20px #39ff14, 
+        0 0 40px #39ff14,
+        0 0 60px #39ff14,
+        0 0 80px #39ff14; /* Increased glow intensity */
+    filter: brightness(1.3); /* Make text brighter */
+}
+
+.light-mode h1 {
+    color: #0066ff; /* Brighter blue */
+    text-shadow: 
+        -2px -2px 0 #fff,  
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff,
+        0 0 25px rgba(0, 102, 255, 1),
+        0 0 50px rgba(0, 102, 255, 0.8); /* Stronger glow */
+    font-weight: bold;
+    filter: brightness(1.2); /* Make text brighter */
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.dark-mode h2 {
+    color: white;
+    font-size: 60px;
+    text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 255, 0.6); /* Added glow */
+    filter: brightness(1.2);
+}
+
+.light-mode h2 {
+    color: #000000;
+    font-size: 60px;
+    text-shadow: 
+        -2px -2px 0 #fff,  
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px 2px 0 #fff,
+        0 0 20px rgba(255, 255, 255, 1); /* Stronger white outline */
+    font-weight: bold;
+    filter: brightness(1.1);
+}
+
+.search-btn, .watch-btn, .download-btn {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .search-btn, .dark-mode .watch-btn, .dark-mode .download-btn {
+    background-color: #39ff14;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.6); /* Added glow */
+}
+
+.light-mode .search-btn, .light-mode .watch-btn, .light-mode .download-btn {
+    background-color: rgb(0, 120, 255); /* Brighter blue */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0, 120, 255, 0.5); /* Increased glow */
+}
+
+.search-btn:hover, .watch-btn:hover, .download-btn:hover {
+    opacity: 0.8;
+    filter: brightness(1.2); /* Brighter on hover */
+}
+
+.toggle-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #39ff14;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.6); /* Added glow to toggle */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+#searchContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+#searchQuery {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    position: relative;
+    z-index: 10;
+}
+
+.video {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(34px);
+    backdrop-filter: blur(30px);
+    width: 90%;
+    max-width: 600px;
+    opacity: 50;
+    transition: opacity 0.5s ease-in-out, transform 0.2s;
+}
+
+.video:hover {
+    transform: scale(1.05);
+}
+
+.video img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Light mode video titles visibility */
+.light-mode .video {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.light-mode .video h3,
+.light-mode .video p {
+    color: #000000;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+}
+
+/* Typing cursor animation */
+.typing-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    font-weight: bold;
+    transition: opacity 0.1s;
+}
+
+.dark-mode .typing-cursor {
+    color: #39ff14;
+    text-shadow: 
+        0 0 20px #39ff14, 
+        0 0 40px #39ff14; /* Added glow to cursor */
+    filter: brightness(1.3);
+}
+
+.light-mode .typing-cursor {
+    color: #0066ff;
+    text-shadow: 
+        -1px -1px 0 #fff,  
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff,
+        0 0 15px rgba(0, 102, 255, 0.8); /* Added glow to cursor */
+    filter: brightness(1.2);
+}
+
+/* Download Modal Styles */
+.download-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+}
+
+.dark-mode .modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    color: #39ff14;
+    box-shadow: 0 0 50px rgba(57, 255, 20, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.dark-mode .close-modal {
+    color: #39ff14;
+}
+
+.close-modal:hover {
+    color: #ff0000;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.credit-text {
+    text-align: center;
+    font-size: 18px;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+.dark-mode .credit-text {
+    color: #ff4757;
+}
+
+.clipboard-text {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.downloader-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.downloader-option {
+    background: rgba(0, 120, 255, 0.1);
+    border: 2px solid rgba(0, 120, 255, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dark-mode .downloader-option {
+    background: rgba(57, 255, 20, 0.1);
+    border: 2px solid rgba(57, 255, 20, 0.5);
+    color: #39ff14;
+}
+
+.downloader-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 120, 255, 0.4);
+}
+
+.dark-mode .downloader-option:hover {
+    box-shadow: 0 10px 30px rgba(57, 255, 20, 0.4);
+}
+
+.downloader-option h3 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.downloader-option p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Footer Styles */
+footer {
+    position: relative;
+    z-index: 10;
+    margin-top: auto; /* Push footer to bottom */
+    padding: 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-text {
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.dark-mode .footer-text {
+    color: #39ff14;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+}
+
+.light-mode .footer-text {
+    color: #0066ff;
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+    font-weight: bold;
+}
+
+.heart {
+    color: #ff0000;
+    font-size: 20px;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.instagram-link::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-radius: 50px;
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.instagram-link:hover::before {
+    opacity: 1;
+    animation: glow 1.5s infinite;
+}
+
+.instagram-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(188, 24, 136, 0.6);
+}
+
+@keyframes glow {
+    0%, 100% { filter: blur(10px); }
+    50% { filter: blur(15px); }
+}
+
+.instagram-icon {
+    font-size: 20px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 100px;
+    }
+
+    .search-btn, .watch-btn, .download-btn {
+        font-size: 14px;
+    }
+
+    #searchQuery {
+        width: 70%;
+    }
+
+    .dark-mode {
+        background: url('https://i.postimg.cc/QMyk9whn/Professor-from-Money-Heist.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .downloader-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-text {
+        font-size: 16px;
+    }
+    
+    .instagram-link {
+        font-size: 14px;
+        padding: 6px 14px;
+    }
+    
+    .instagram-icon {
+        font-size: 18px;
+    }
+}
